@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import data.Data;
 
 import sds.Query;
 import sds.Reply;
@@ -26,39 +32,47 @@ public class ServeurThread extends Thread {
             while (open) {
                 Query query = (Query) in.readObject();
                 int numeroService = query.getService();
-                int codeErr;
+                int codeErr = 418;
                 Object obj = null;
+                Data service = Data.getInstance();
+                Set<String> set;
                 switch (numeroService) {
                 case 0:
-                    // codeErr =
+                    open = false;
+                    codeErr = 200;
                     break;
                 case 1:
-                    // codeErr =
+                    codeErr = service.putSurname(query.getArg1(),query.getArg2());
                     break;
                 case 2:
-                    // codeErr =
+                     codeErr = service.postName(query.getArg1(), query.getArg2());
                     break;
                 case 3:
-                    // codeErr =
+                     codeErr = service.postSurname(query.getArg1(), query.getArg2());
                     break;
                 case 4:
-                    // codeErr =
+                    HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+                     codeErr = service.getAll(map);
+                     obj = map;
                     break;
                 case 5:
-                    // codeErr =
+                   set = new HashSet<String>();
+                    codeErr = service.getName(set);
                     break;
                 case 6:
-                    // codeErr =
+                    set = new HashSet<String>();
+                    codeErr = service.getSurname(set, query.getArg1());
                     break;
                 case 7:
-                    // codeErr =
+                    codeErr = service.deleteSurname(query.getArg1());
                     break;
                 case 8:
-                    // codeErr =
+                    codeErr = service.deleteName(query.getArg1());
                     break;
                 }
                 Reply reply = new Reply(numeroService, codeErr, obj,
                         query.getQueryID());
+                out.writeObject(reply);
             }
             out.close();
             in.close();
