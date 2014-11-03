@@ -110,11 +110,22 @@ public class Data {
 	
 	public int deleteSurname(String surname) {
 		for(int i = 0 ; i < this.associations.size() ; i++) {
-			if(this.associations.get(i).key.equals(surname)) {
+			if(this.associations.get(i).value.equals(surname)) {
 				this.associations.remove(i);
 				return ErrorCode.OK;
 			}
 		}
 		return ErrorCode.BAD_REQUEST;
 	}
+	
+	public int deleteName(String name) {
+	    if(name == null) return ErrorCode.BAD_REQUEST;
+	    if(!nameExists(name)) return ErrorCode.NOT_FOUND;
+        for(int i = 0 ; i < this.associations.size() ; i++) {
+            if(this.associations.get(i).key.equals(name)) {
+                this.associations.remove(i);
+            }
+        }
+        return ErrorCode.OK;
+    }
 }
