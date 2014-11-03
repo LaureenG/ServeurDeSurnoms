@@ -2,10 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-<<<<<<< HEAD
 	<classpathentry kind="lib" path="/home/gl307364/workspace/ServeurDeSurnoms/sdslib.jar"/>
-=======
-	<classpathentry kind="lib" path="/home/user/Documents/cours/SI4/sem1/internet et reseaux/partie2/rendu1/sdslib.jar"/>
->>>>>>> 5a71cf6b035cb8213bd0d0089daff066b54b4f63
 	<classpathentry kind="output" path="bin"/>
 </classpath>
