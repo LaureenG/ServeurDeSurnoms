@@ -2,6 +2,7 @@ package data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -81,7 +82,18 @@ public class Data {
 	}
 
 	public int getAll(HashMap<String, List<String>> map) {
-		// TODO : a faire
+		Set<String> nom = new HashSet<String>();
+		getName(nom);
+		List<String> l = new ArrayList<String>(nom);
+		for (String n : l) {
+			List<String> ll = new ArrayList<String>();
+			for (Entry e : this.associations) {
+				if (e.key.equals(n)) {
+					ll.add(e.value);
+				}
+			}
+			map.put(n, ll);
+		}
 		return ErrorCode.OK;
 	}
 
@@ -107,17 +119,17 @@ public class Data {
 			return ErrorCode.OK;
 		}
 	}
-	
+
 	public int deleteSurname(String surname) {
-		for(int i = 0 ; i < this.associations.size() ; i++) {
-			if(this.associations.get(i).value.equals(surname)) {
+		for (int i = 0; i < this.associations.size(); i++) {
+			if (this.associations.get(i).value.equals(surname)) {
 				this.associations.remove(i);
 				return ErrorCode.OK;
 			}
 		}
 		return ErrorCode.BAD_REQUEST;
 	}
-	
+
 	public int deleteName(String name) {
 	    if(name == null) return ErrorCode.BAD_REQUEST;
 	    if(!nameExists(name)) return ErrorCode.NOT_FOUND;
