@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import sds.ErrorCode;
-
+//TODO gérer les cas où le paramètre est null en renvoyant le code d'erreur BAD_REQUEST
+//TODO si le nom ou surnom n'est pas dans la liste : retourner code d'erreur NOT_FOUND
 public class Data {
 	private class Entry {
 		public String key;
