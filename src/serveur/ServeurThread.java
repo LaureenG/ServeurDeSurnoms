@@ -19,6 +19,7 @@ import sds.Reply;
 
 public class ServeurThread extends Thread {
     private Socket socket = null;
+    private Object obj = null;
 
     public ServeurThread(Socket socket) {
         super("MultiServerThread");
@@ -42,8 +43,7 @@ public class ServeurThread extends Thread {
         System.out.println("Dépaquetage ...");
         int numeroService = query.getService();
         int codeErr = ErrorCode.IM_A_TEAPOT;
-        Object obj = null;
-        codeErr = appelService(query, obj);
+        codeErr = appelService(query);
         System.out.println("Paquetage ...");
         if (codeErr < 0) {
             return null;
@@ -52,7 +52,7 @@ public class ServeurThread extends Thread {
         }
     }
 
-    private int appelService(Query query, Object obj) {
+    private int appelService(Query query) {
         Data service = Data.getInstance();
         Set<String> set = new HashSet<String>();
         int codeErr = -1;
