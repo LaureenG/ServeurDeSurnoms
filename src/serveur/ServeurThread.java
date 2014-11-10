@@ -24,6 +24,7 @@ public class ServeurThread extends Thread {
     }
 
     public void run() {
+    	System.out.println("Nouveau client!");
         try {
             ObjectOutputStream out = new ObjectOutputStream(
                     new BufferedOutputStream(socket.getOutputStream()));
@@ -31,7 +32,10 @@ public class ServeurThread extends Thread {
                     new BufferedInputStream(socket.getInputStream()));
             boolean open = true;
             while (open) {
+            	System.out.print("Reception ... \t\t");
                 Query query = (Query) in.readObject();
+                System.out.println("[OK]");
+                System.out.println("Dépaquetage ...");
                 int numeroService = query.getService();
                 int codeErr = 418;
                 Object obj = null;
@@ -71,9 +75,13 @@ public class ServeurThread extends Thread {
                     codeErr = service.deleteName(query.getArg1());
                     break;
                 }
+                System.out.println("Paquetage ...");
                 Reply reply = new Reply(numeroService, codeErr, obj,
                         query.getQueryID());
+                System.out.print("Envoie ... \t\t");
                 out.writeObject(reply);
+                out.flush();
+                System.out.println("[OK]");
             }
             out.close();
             in.close();
@@ -81,7 +89,6 @@ public class ServeurThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
