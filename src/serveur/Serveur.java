@@ -16,7 +16,7 @@ public class Serveur {
         }
         while (listening) {
             new ServeurThread(serverSocket.accept()).start();
-            serverSocket.close();
         }
+        serverSocket.close();
     }
 }
