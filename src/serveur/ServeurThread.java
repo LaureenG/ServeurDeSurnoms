@@ -83,6 +83,7 @@ public class ServeurThread extends Thread {
                 out.flush();
                 System.out.println("[OK]");
             }
+            System.out.println("CLOSE");
             out.close();
             in.close();
             socket.close();
