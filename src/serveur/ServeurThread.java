@@ -43,6 +43,7 @@ public class ServeurThread extends Thread {
         System.out.println("Dépaquetage ...");
         int numeroService = query.getService();
         int codeErr = ErrorCode.IM_A_TEAPOT;
+        obj = null;
         codeErr = appelService(query);
         System.out.println("Paquetage ...");
         if (codeErr < 0) {
