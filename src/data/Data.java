@@ -128,7 +128,7 @@ public class Data {
 				return ErrorCode.OK;
 			}
 		}
-		return ErrorCode.BAD_REQUEST;
+		return ErrorCode.NOT_FOUND;
 	}
 
 	public int deleteName(String name) {
