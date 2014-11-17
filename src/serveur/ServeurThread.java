@@ -18,34 +18,37 @@ import sds.Query;
 import sds.Reply;
 
 public class ServeurThread extends Thread {
+	private static int nombreConnexion = 0;
+	private int numeroConnexion;
     private Socket socket = null;
     private Object obj = null;
 
     public ServeurThread(Socket socket) {
         super("MultiServerThread");
+        this.numeroConnexion = ++nombreConnexion;
         this.socket = socket;
     }
 
     private Query reception(ObjectInputStream in)
             throws ClassNotFoundException, IOException {
-        System.out.print("Reception ... \t\t");
+        System.out.print(numeroConnexion + " > Reception ... \t\t");
         return (Query) in.readObject();
     }
 
     private void envoi(Reply reply, ObjectOutputStream out) throws IOException {
-        System.out.print("Envoi ... \t\t");
+        System.out.print(numeroConnexion + " > Envoi ... \t\t");
         out.writeObject(reply);
         out.flush();
         System.out.println("[OK]");
     }
 
     private Reply execution(Query query) {
-        System.out.println("Dépaquetage ...");
+        System.out.println(numeroConnexion + " > Dépaquetage ...");
         int numeroService = query.getService();
         int codeErr = ErrorCode.IM_A_TEAPOT;
         obj = null;
         codeErr = appelService(query);
-        System.out.println("Paquetage ...");
+        System.out.println(numeroConnexion + " > Paquetage ...");
         if (codeErr < 0) {
             return null;
         } else {
@@ -127,7 +130,7 @@ public class ServeurThread extends Thread {
                 open = false;
             }
         }
-        System.out.println("Fermeture de la connexion ...");
+        System.out.println(numeroConnexion + " > Fermeture de la connexion ...");
         try {
             out.close();
             in.close();

@@ -4,15 +4,17 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Serveur {
+	public static final int PORT = 8080;
+	
     public static void main(String[] args) throws IOException {
         // Création du socket d'écoute sur le port 1234
-        int portEcoute = 1234;
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(portEcoute);
-            System.out.println("Ecoute sur le port 1234");
+            serverSocket = new ServerSocket(PORT);
+            System.out.println("Ecoute sur le port "+PORT);
         } catch (IOException e) {
-            System.err.println("Could not listen on port: 1234.");
+        	e.printStackTrace();
+            System.err.println("Could not listen on port: "+ PORT);
             System.exit(-1);
         }
         // Attente de connexions
