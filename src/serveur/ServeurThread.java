@@ -127,7 +127,7 @@ public class ServeurThread extends Thread {
                 open = false;
             }
         }
-        System.out.println("CLOSE");
+        System.out.println("Fermeture de la connexion ...");
         try {
             out.close();
             in.close();
