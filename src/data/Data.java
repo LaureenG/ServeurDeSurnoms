@@ -102,6 +102,7 @@ public class Data {
 		for (Entry e : this.associations) {
 			set.add(e.key);
 		}
+		System.out.println(set);
 		return ErrorCode.OK;
 	}
 
@@ -137,6 +138,7 @@ public class Data {
         for(int i = 0 ; i < this.associations.size() ; i++) {
             if(this.associations.get(i).key.equals(name)) {
                 this.associations.remove(i);
+                i--;
             }
         }
         return ErrorCode.OK;
