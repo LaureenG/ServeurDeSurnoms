@@ -10,12 +10,14 @@ public class Serveur {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(portEcoute);
+            System.out.println("Ecoute sur le port 1234");
         } catch (IOException e) {
             System.err.println("Could not listen on port: 1234.");
             System.exit(-1);
         }
         // Attente de connexions
         boolean listening = true;
+        System.out.println("En attente de connexions...");
         while (listening) {
             // Création d'une thread pour gérer le client
             new ServeurThread(serverSocket.accept()).start();

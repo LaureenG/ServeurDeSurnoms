@@ -74,9 +74,11 @@ public class ServeurThread extends Thread {
             break;
         case 5:
             codeErr = service.getName(set);
+            obj = set;
             break;
         case 6:
             codeErr = service.getSurname(set, query.getArg1());
+            obj = set;
             break;
         case 7:
             codeErr = service.deleteSurname(query.getArg1());
