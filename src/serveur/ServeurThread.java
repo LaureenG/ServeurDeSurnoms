@@ -74,7 +74,6 @@ public class ServeurThread extends Thread {
             break;
         case 5:
             codeErr = service.getName(set);
-            System.out.println(set);
             break;
         case 6:
             codeErr = service.getSurname(set, query.getArg1());
