@@ -16,6 +16,7 @@ import data.Data;
 import sds.ErrorCode;
 import sds.Query;
 import sds.Reply;
+import sds.Service;
 
 public class ServeurThread extends Thread {
 	private static int nombreConnexion = 0;
@@ -61,32 +62,32 @@ public class ServeurThread extends Thread {
         Set<String> set = new HashSet<String>();
         int codeErr = -1;
         switch (query.getService()) {
-        case 1:
+        case Service.PUT_SURNAME:
             codeErr = service.putSurname(query.getArg1(), query.getArg2());
             break;
-        case 2:
+        case Service.POST_NAME:
             codeErr = service.postName(query.getArg1(), query.getArg2());
             break;
-        case 3:
+        case Service.POST_SURNAME:
             codeErr = service.postSurname(query.getArg1(), query.getArg2());
             break;
-        case 4:
+        case Service.GET_ALL:
             HashMap<String, List<String>> map = new HashMap<String, List<String>>();
             codeErr = service.getAll(map);
             obj = map;
             break;
-        case 5:
+        case Service.GET_NAME:
             codeErr = service.getName(set);
             obj = set;
             break;
-        case 6:
+        case Service.GET_SURNAME:
             codeErr = service.getSurname(set, query.getArg1());
             obj = set;
             break;
-        case 7:
+        case Service.DELETE_SURNAME:
             codeErr = service.deleteSurname(query.getArg1());
             break;
-        case 8:
+        case Service.DELETE_NAME:
             codeErr = service.deleteName(query.getArg1());
             break;
         }
