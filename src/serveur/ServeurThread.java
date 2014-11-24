@@ -100,8 +100,10 @@ public class ServeurThread extends Thread {
         try {
             out = new ObjectOutputStream(new BufferedOutputStream(
                     socket.getOutputStream()));
+            System.out.println("OUT OK");
             in = new ObjectInputStream(new BufferedInputStream(
                     socket.getInputStream()));
+            System.out.println("IN OK");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,6 +114,7 @@ public class ServeurThread extends Thread {
             Query query;
             try {
                 query = reception(in);
+                System.out.println("PAQUET BIEN RECU");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 return;
@@ -122,6 +125,7 @@ public class ServeurThread extends Thread {
             Reply reply = execution(query);
             if (reply != null) {
                 try {
+                	System.out.println("CA DEVRAIT ENVOYER UN PAQUET");
                     envoi(reply, out);
                 } catch (IOException e) {
                     e.printStackTrace();

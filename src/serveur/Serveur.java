@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Serveur {
-	public static final int PORT = 8080;
+	public static final int PORT = 1999;
 	
     public static void main(String[] args) throws IOException {
-        // Création du socket d'écoute sur le port 1234
+        // Création du socket d'écoute sur le port 1999
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(PORT);
